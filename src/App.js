@@ -17,36 +17,50 @@ function App() {
   const [forecastData, setForecastData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
   useEffect(() => {
     document.body.className = darkMode ? "dark-mode" : "";
   }, [darkMode]);
 
   const handleSearch = async (city, countryCode) => {
+    console.log("[handleSearch] Starting search with:", { city, countryCode });
     if (!city || !countryCode) {
+      console.log(
+        "[handleSearch] Missing required parameters, aborting search"
+      );
       setCurrentWeather(null);
       setForecastData(null);
       setError(null);
       return;
     }
 
+    console.log("[handleSearch] Setting loading state and clearing errors");
     setLoading(true);
     setError(null);
 
     try {
+      console.log("[handleSearch] Fetching weather and forecast data");
       const [weather, forecast] = await Promise.all([
         fetchCurrentWeather(city, countryCode),
         fetchForecast(city, countryCode),
       ]);
 
+      console.log("[handleSearch] Data fetched successfully:", {
+        weatherData: weather,
+        forecastData: forecast,
+      });
       setCurrentWeather(weather);
       setForecastData(forecast);
     } catch (err) {
+      console.error("[handleSearch] Error fetching weather data:", err.message);
       setError(err.message);
       setCurrentWeather(null);
       setForecastData(null);
     } finally {
+      console.log("[handleSearch] Setting loading state to false after delay");
       setTimeout(() => {
         setLoading(false);
+        console.log("[handleSearch] Search operation completed");
       }, 2000);
     }
   };
@@ -60,6 +74,7 @@ function App() {
       <main className="main-content">
         <SearchBar onCitySelect={handleSearch} />
         {loading && <WeatherPreloader />}
+
         {!loading && currentWeather !== null && (
           <p
             style={{
@@ -70,9 +85,15 @@ function App() {
               margin: "10px 0",
             }}
           >
-            {" "}
-            View temperature in °F :
-            <ToggleSwitch onToggle={toggleUnit} checked={unit !== "metric"} />
+            <ToggleSwitch
+              onToggle={toggleUnit}
+              checked={unit !== "metric"}
+              label={
+                unit !== "metric"
+                  ? "View temperature in °F"
+                  : "View temperature in °C"
+              }
+            />
           </p>
         )}
         <div style={{ textAlign: "center", margin: "20px" }}></div>

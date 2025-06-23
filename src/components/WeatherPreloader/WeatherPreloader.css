@@ -1,10 +1,9 @@
-/* Main container to overlay and center the preloader */
 .preloader-container {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 40px 20px;
-  min-height: 200px; /* Ensures it has some space */
+  min-height: 200px;
 }
 
 .preloader-content {
@@ -13,14 +12,12 @@
   align-items: center;
 }
 
-/* The group that holds all the animated weather icons */
 .weather-icon-group {
   position: relative;
   width: 150px;
   height: 120px;
 }
 
-/* --- The Sun --- */
 .sun {
   position: absolute;
   top: 10px;
@@ -28,12 +25,11 @@
   transform: translateX(-50%);
   width: 60px;
   height: 60px;
-  background-color: #ffc107; /* A sunny yellow */
+  background-color: #ffc107;
   border-radius: 50%;
   animation: spin 12s linear infinite;
 }
 
-/* --- The Cloud --- */
 .cloud {
   position: absolute;
   bottom: 0;
@@ -46,7 +42,6 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   animation: drift 4s ease-in-out infinite;
 }
-/* Use pseudo-elements to create the bumpy cloud shape */
 .cloud::before,
 .cloud::after {
   content: "";
@@ -67,10 +62,9 @@
   right: 5px;
 }
 
-/* --- The Rain --- */
 .rain {
   position: absolute;
-  top: 100%; /* Start the rain right below the cloud */
+  top: 100%;
   left: 0;
   width: 100%;
   display: flex;
@@ -79,12 +73,11 @@
 .drop {
   width: 2px;
   height: 12px;
-  background-color: #03a9f4; /* A nice blue for rain */
+  background-color: #03a9f4;
   border-radius: 2px;
   animation: rain-fall 1.5s linear infinite;
   opacity: 0;
 }
-/* Stagger the animation of each raindrop for a natural effect */
 .drop:nth-child(1) {
   animation-delay: 0s;
 }

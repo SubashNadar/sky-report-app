@@ -1,5 +1,3 @@
-// Example in a Forecast.js component
-import React from "react";
 import "./ForeCast.css";
 import { useSkyReport } from "../../context/SkyReportProvider";
 import { convertToFahrenheit } from "../../utils/temperatureUtils";

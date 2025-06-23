@@ -112,3 +112,54 @@
   margin-top: 8px;
   padding-left: 15px;
 }
+
+.location-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 24px;
+
+  background-color: var(--nav-bar);
+  color: var(--card-background);
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.location-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.location-btn:hover {
+  background-color: var(--nav-bar);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.location-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.location-btn:focus-visible {
+  outline: 3px solid #62b0ff;
+  outline-offset: 2px;
+}
+
+.location-btn:disabled {
+  background-color: #a0a0a0;
+  color: #e0e0e0;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}

@@ -1,12 +1,9 @@
 import { OpenWeatherMap_API_KEY, OpenWeatherMap_BASE_URL } from "./config.js";
 const fetchWeatherData = async (endpoint, city, countryCode = null) => {
   if (!city) throw new Error("City parameter is required.");
-  if (!countryCode) throw new Error("countryCode parameter is required.");
 
   let locationQuery = city.trim();
-  if (countryCode) {
-    locationQuery += `,${countryCode.trim()}`;
-  }
+  locationQuery += `,${countryCode.trim()}`;
 
   const encodedLocation = encodeURIComponent(locationQuery);
 
@@ -15,8 +12,9 @@ const fetchWeatherData = async (endpoint, city, countryCode = null) => {
   );
   console.log(response);
   if (!response.ok) {
+    const errorType = endpoint === "weather" ? "City" : "Forecast";
     throw new Error(
-      `${endpoint === "weather" ? "City" : "Forecast"} not available.`
+      `${errorType} not available. Status: ${response.status}, Message: ${response.statusText}`
     );
   }
   const jsonData = await response.json();

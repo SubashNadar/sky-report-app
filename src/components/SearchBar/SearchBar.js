@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import {
+  AccurateWeather_API_KEY,
+  Cities_Auto_Recommendation_API,
+} from "../../api/config";
 import "./SearchBar.css";
-import { useSkyReport } from "../../context/SkyReportProvider";
 
 const SearchIcon = () => (
   <svg
@@ -33,8 +36,8 @@ const ClearIcon = ({ onClick }) => (
 const LoadingSpinner = () => <div className="loading-spinner"></div>;
 
 const SearchBar = ({ onCitySelect }) => {
-  const { city, updateCity } = useSkyReport();
   const [query, setQuery] = useState("");
+  const [showSuggestions, setShowSuggestions] = useState(true);
   const [code, setCode] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -53,8 +56,7 @@ const SearchBar = ({ onCitySelect }) => {
 
       try {
         const response = await fetch(
-          `http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=**Token**&q=` +
-            query
+          `${Cities_Auto_Recommendation_API}/autocomplete?apikey=${AccurateWeather_API_KEY}&q=${query}`
         );
         const d = await response.json();
         console.log(d);
@@ -77,14 +79,14 @@ const SearchBar = ({ onCitySelect }) => {
   useEffect(() => {
     const controller = new AbortController();
     const timer = setTimeout(() => {
-      fetchCities(city, controller.signal);
+      fetchCities(query, controller.signal);
     }, 300);
 
     return () => {
       clearTimeout(timer);
       controller.abort();
     };
-  }, [city, query, fetchCities]);
+  }, [query, fetchCities]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -98,22 +100,24 @@ const SearchBar = ({ onCitySelect }) => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
   const handleSuggestionClick = (city) => {
+    setSuggestions([]);
     setQuery(city.value);
     setCode(city.code);
-    updateCity(city.value);
     setError(null);
     onCitySelect(city.value, city.code);
   };
 
   const handleClear = () => {
+    setShowSuggestions(true);
     setQuery("");
     setCode("");
-    updateCity("");
     setSuggestions([]);
     setError("");
-    updateCity("");
+    onCitySelect("", "");
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (query.trim()) {
@@ -123,6 +127,9 @@ const SearchBar = ({ onCitySelect }) => {
 
   return (
     <div className="search-container" ref={searchContainerRef}>
+      <p style={{ textAlign: "center", color: "#666", fontSize: " 0.9em" }}>
+        Enter a city to get a detailed 5-day forecast.
+      </p>
       <form
         className="search-bar-form"
         onSubmit={handleSubmit}
@@ -136,8 +143,11 @@ const SearchBar = ({ onCitySelect }) => {
             placeholder="Search for a city..."
             value={query}
             onChange={(e) => {
-              updateCity(e.target.value);
+              setShowSuggestions(true);
               setQuery(e.target.value);
+              if (e.target.value.length === 0) {
+                onCitySelect("", "");
+              }
             }}
           />
           {isLoading && <LoadingSpinner />}
@@ -145,12 +155,34 @@ const SearchBar = ({ onCitySelect }) => {
         </div>
       </form>
 
-      {suggestions.length > 0 && (
+      {!query.length > 0 && (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "20px",
+          }}
+        >
+          <button
+            class="location-btn"
+            onClick={() => {
+              setQuery("Hyderabad");
+              onCitySelect("Hyderabad", "IN");
+            }}
+          >
+            <span>
+              {isLoading ? "📍Fetching Location..." : "📍Use Current Location"}
+            </span>
+          </button>
+        </div>
+      )}
+      {suggestions.length > 0 && showSuggestions && (
         <ul className="suggestions-list">
           {suggestions.map((city) => (
             <li
               key={city.id}
               onClick={() => {
+                setShowSuggestions(false);
                 setSuggestions([]);
                 handleSuggestionClick(city);
               }}
@@ -162,7 +194,7 @@ const SearchBar = ({ onCitySelect }) => {
         </ul>
       )}
 
-      {error && <p className="error-message">{error}</p>}
+      {query && error && <p className="error-message">{error}</p>}
     </div>
   );
 };
