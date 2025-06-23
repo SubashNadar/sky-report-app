@@ -5,8 +5,9 @@ A clean and modern weather application built with React to provide real-time sky
 City Search: Find any city with a fast, intuitive autocomplete search.
 Weather Forecast: Get the current weather plus a 5-day forecast with max/min temperatures.
 Dark & Light Mode: Switch between a beautiful dark or light theme.
-Smart Recommendations: Receive helpful suggestions based on the weather.
 Responsive Design: Looks great on both desktop and mobile devices.
+Future implementations:
+Smart Recommendations: Receive helpful suggestions based on the weather.
 🛠️ Tech Stack
 Frontend: React.js
 State Management: React Hooks (useContext, useState,...)
