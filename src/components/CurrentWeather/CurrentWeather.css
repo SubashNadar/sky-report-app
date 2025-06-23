@@ -1,0 +1,89 @@
+.weather-card {
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.5)
+  );
+  color: var(--text-color, #333);
+  padding: 20px 25px;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  max-width: 450px;
+  margin: 20px auto;
+  transition: background-color 0.3s, color 0.3s;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.card-header {
+  text-align: left;
+  border-bottom: 1px solid var(--card-border, #eee);
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.weather-description {
+  margin: 5px 0 0;
+  font-size: 1.1rem;
+  color: #888;
+}
+
+.card-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.temperature-container {
+  display: flex;
+  align-items: flex-start;
+}
+
+.temperature {
+  font-size: 5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.temperature-unit {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-top: 10px;
+  margin-left: 5px;
+}
+
+.weather-icon {
+  width: 120px;
+  height: 120px;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15));
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 25px;
+  padding-top: 15px;
+  border-top: 1px solid var(--card-border, #eee);
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.detail-item .label {
+  color: --navbar-txt;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.detail-item .value {
+  font-weight: 600;
+}

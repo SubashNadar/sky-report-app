@@ -1,0 +1,54 @@
+/* The main container for the switch */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px; /* Width of the switch track */
+  height: 28px; /* Height of the switch track */
+
+  /* Reset button styles */
+  background-color: #ccc; /* Default 'off' color */
+  border: none;
+  border-radius: 28px; /* Fully rounded corners to make a pill shape */
+  cursor: pointer;
+
+  /* Smooth transition for the background color */
+  transition: background-color 0.3s ease-in-out;
+}
+
+.toggle-switch:focus-visible {
+  /* Adds a visible ring for keyboard users, great for accessibility */
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+}
+
+/* The circular thumb that slides */
+.toggle-thumb {
+  position: absolute;
+  top: 2px; /* Small offset from the top */
+  left: 2px; /* Small offset from the left */
+
+  width: 24px; /* Size of the thumb */
+  height: 24px; /* Make it a square */
+
+  background-color: white;
+  border-radius: 50%; /* Makes the square a perfect circle */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+  /* The magic for the sliding animation */
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* --- The "ON" State --- */
+
+/* 1. Change the background color of the track when toggled */
+.toggle-switch.toggled {
+  /* You can use a theme variable here, e.g., var(--primary-color) */
+  background-color: #2196f3; /* A nice blue for the 'on' state */
+}
+
+/* 2. Move the thumb to the right when toggled */
+.toggle-switch.toggled .toggle-thumb {
+  /* The distance to move is track_width - thumb_width - (left_offset * 2) */
+  /* 50px - 24px - 4px = 22px */
+  transform: translateX(22px);
+}

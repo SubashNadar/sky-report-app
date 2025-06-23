@@ -1,38 +1,45 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.app-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  min-height: 100vh;
 }
 
-.App-link {
-  color: #61dafb;
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+:root {
+  --background-color: #ffffff;
+  --text-color: #212529;
+  --card-background: #f8f9fa;
+  --nav-bar: #1e1e1e;
+  --navbar-txt: #e0e0e0;
+  --card-border: #444;
+  --link-color: #007bff;
+}
+
+.dark-mode {
+  --background-color: #121212;
+  --text-color: #e0e0e0;
+  --card-background: #1e1e1e;
+  --card-border: #444;
+  --nav-bar: #f8f9fa;
+  --navbar-txt: #212529;
+  --link-color: #61dafb;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+}
+
+.some-card-component {
+  background-color: var(--card-background);
+  border: 1px solid var(--card-border);
+}
+
+.some-link {
+  color: var(--link-color);
 }

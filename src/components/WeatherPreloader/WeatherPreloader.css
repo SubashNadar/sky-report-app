@@ -1,0 +1,144 @@
+/* Main container to overlay and center the preloader */
+.preloader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  min-height: 200px; /* Ensures it has some space */
+}
+
+.preloader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* The group that holds all the animated weather icons */
+.weather-icon-group {
+  position: relative;
+  width: 150px;
+  height: 120px;
+}
+
+/* --- The Sun --- */
+.sun {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  background-color: #ffc107; /* A sunny yellow */
+  border-radius: 50%;
+  animation: spin 12s linear infinite;
+}
+
+/* --- The Cloud --- */
+.cloud {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 60px;
+  background: #fff;
+  border-radius: 60px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  animation: drift 4s ease-in-out infinite;
+}
+/* Use pseudo-elements to create the bumpy cloud shape */
+.cloud::before,
+.cloud::after {
+  content: "";
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+}
+.cloud::before {
+  width: 60px;
+  height: 60px;
+  top: -30px;
+  left: 10px;
+}
+.cloud::after {
+  width: 70px;
+  height: 70px;
+  top: -25px;
+  right: 5px;
+}
+
+/* --- The Rain --- */
+.rain {
+  position: absolute;
+  top: 100%; /* Start the rain right below the cloud */
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.drop {
+  width: 2px;
+  height: 12px;
+  background-color: #03a9f4; /* A nice blue for rain */
+  border-radius: 2px;
+  animation: rain-fall 1.5s linear infinite;
+  opacity: 0;
+}
+/* Stagger the animation of each raindrop for a natural effect */
+.drop:nth-child(1) {
+  animation-delay: 0s;
+}
+.drop:nth-child(2) {
+  animation-delay: 0.6s;
+}
+.drop:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.drop:nth-child(4) {
+  animation-delay: 1s;
+}
+.drop:nth-child(5) {
+  animation-delay: 0.4s;
+}
+
+/* --- The Loading Text --- */
+.loading-text {
+  margin-top: 20px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+/* --- Keyframe Animations --- */
+@keyframes spin {
+  from {
+    transform: translateX(-50%) rotate(0deg);
+  }
+  to {
+    transform: translateX(-50%) rotate(360deg);
+  }
+}
+
+@keyframes drift {
+  0% {
+    transform: translateX(-60%);
+  }
+  50% {
+    transform: translateX(-40%);
+  }
+  100% {
+    transform: translateX(-60%);
+  }
+}
+
+@keyframes rain-fall {
+  0% {
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+}
