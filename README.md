@@ -1,10 +1,24 @@
-Sky Report App 🌦️
-![alt text](https://img.shields.io/badge/react-18.2.0-blue.svg)
-![alt text](https://img.shields.io/badge/License-MIT-yellow.svg)
-Sky Report is a sleek and modern weather application designed to deliver real-time weather data, multi-day forecasts, and a beautiful, user-centric interface. It provides instant sky reports for any city, complete with smart recommendations and a gorgeous dark mode.
+🌦️ Sky Report App
+A clean and modern weather application built with React to provide real-time sky conditions and multi-day forecasts.
 
-(Pro-tip: Record a short GIF showing the app's features and upload it to your repo or a site like Giphy to embed it here.)
+🎥 [Watch Demo Video](https://github.com/SubashNadar/sky-report-app/blob/master/Demo.mp4)
+
 ✨ Key Features
-🌍 Dynamic City Search: An intuitive search bar with city autocomplete powered by the GeoDB Cities API ensures you can find any location quickly and accurately.
-☀️ Detailed Weather Forecast: Get not just the current weather, but also a 5-day forecast complete with maximum and minimum daily temperatures, helping you plan your week.
-🎨 Dark & Light Mode: A stunning, user-selectable dark mode and light mode. The app will remember your choice for the next time you visit (using localStorage).
+
+🔍 City Search: Fast, intuitive autocomplete to find any city easily.
+
+🌡️ Weather Forecast: Get current conditions + 5-day forecast with high/low temperatures.
+
+🌓 Dark & Light Mode: Toggle between stunning light and dark themes.
+
+📱 Responsive Design: Optimized for both desktop and mobile experiences.
+
+🚀 Future Implementations
+🤖 Smart Recommendations: Suggest useful tips and actions based on the weather conditions.
+
+🛠️ Tech Stack
+Frontend: React.js
+
+State Management: React Hooks (useContext, useState, etc.)
+
+APIs: OpenWeatherMap, AccuWeather
